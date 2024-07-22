@@ -1,7 +1,13 @@
 from main.lexer import Lexer
 from main.parser.parser import Parser
 from main.interpreter import Interpreter
-from src.context import Context
+from main.symboltable import SymbolTable
+from src.run.context import Context
+from src.values.number import Number
+
+global_symbol_table = SymbolTable()
+global_symbol_table.set("null", Number(0))
+
 
 def run(fn, text):
     lexer = Lexer(fn, text)
@@ -14,6 +20,7 @@ def run(fn, text):
     
     interpreter = Interpreter()
     context = Context("<program>")
+    context.symbol_table = global_symbol_table
     result = interpreter.visit(ast.node, context)
 
     return result.value, result.error #ast.node, ast.error
