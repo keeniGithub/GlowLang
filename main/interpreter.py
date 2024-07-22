@@ -2,7 +2,8 @@ from src.values.number import Number
 from src.run.runtime import RTResult
 from src.var.tokens import (
     TT_MUL, TT_DIV,
-    TT_PLUS, TT_MINUS
+    TT_PLUS, TT_MINUS,
+    TT_POW
 )
 
 class Interpreter:
@@ -34,6 +35,8 @@ class Interpreter:
             result, error = left.multed_by(right)
         elif node.op_tok.type == TT_DIV:
             result, error = left.dived_by(right)
+        elif node.op_tok.type == TT_POW:
+            result, error = left.powed_by(right)
 
         if error:
             return res.failure(error)
