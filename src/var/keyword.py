@@ -2,5 +2,9 @@ KEYWORDS = [
     "var",
     "and",
     "or",
-    "not"
+    "not",
+    "if",
+    "then",
+    "elif",
+    "else"
 ]
