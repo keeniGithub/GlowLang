@@ -7,7 +7,8 @@ from src.values.number import Number
 
 global_symbol_table = SymbolTable()
 global_symbol_table.set("null", Number(0))
-
+global_symbol_table.set("true", Number(1))
+global_symbol_table.set("false", Number(0))
 
 def run(fn, text):
     lexer = Lexer(fn, text)
