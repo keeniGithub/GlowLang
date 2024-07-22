@@ -1,4 +1,4 @@
-from src.run import run
+from src.run.run import run
 
 while True:
     text = input("GlowShell >>> ")

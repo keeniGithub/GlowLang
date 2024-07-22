@@ -9,7 +9,7 @@ from src.var.tokens import (
 from src.nodes.number import NumberNode
 from src.nodes.binop import BinOpNode
 from src.nodes.unaryopn import UnaryOpNode
-from src.parser.result import ParserResult
+from main.parser.result import ParserResult
 from src.error.invalidsyntax import InvalidSyntaxError
 
 class Parser:
