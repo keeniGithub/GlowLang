@@ -46,13 +46,19 @@ class Lexer():
                 self.advance()
             elif self.current_char == "^": 
                 tokens.append(Token(TT_POW, pos_start=self.pos))
-
                 self.advance()
+
             elif self.current_char == "(":
                 tokens.append(Token(TT_LPAREN, pos_start=self.pos))
                 self.advance()
             elif self.current_char == ")":
                 tokens.append(Token(TT_RPAREN, pos_start=self.pos))
+                self.advance()
+            elif self.current_char == "[":
+                tokens.append(Token(TT_LSQUARE, pos_start=self.pos))
+                self.advance()
+            elif self.current_char == "]":
+                tokens.append(Token(TT_RSQUARE, pos_start=self.pos))
                 self.advance()
 
             elif self.current_char == "!":
