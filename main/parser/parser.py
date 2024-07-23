@@ -15,7 +15,9 @@ from src.nodes.binop import BinOpNode
 from src.nodes.unaryop import UnaryOpNode
 from src.nodes.variables.access import VarAccessNode
 from src.nodes.variables.assign import VarAssignNode
-from src.nodes.ifn import IfNode
+from src.nodes.ifN import IfNode
+from src.nodes.loops.forN import ForNode
+from src.nodes.loops.whileN import WhileNode
 from main.parser.result import ParseResult
 from src.error.invalidsyntax import InvalidSyntaxError
 
@@ -57,7 +59,7 @@ class Parser:
         condition = res.register(self.expr())
         if res.error: return res
 
-        if not self.current_tok.matches(TT_KEYWORD, 'then'):
+        if not self.current_tok.matches(TT_KEYWORD, "then"):
             return res.failure(InvalidSyntaxError(
                 self.current_tok.pos_start, self.current_tok.pos_end,
                 f"Expected 'then'"
@@ -77,7 +79,7 @@ class Parser:
             condition = res.register(self.expr())
             if res.error: return res
 
-            if not self.current_tok.matches(TT_KEYWORD, 'then'):
+            if not self.current_tok.matches(TT_KEYWORD,"then"):
                 return res.failure(InvalidSyntaxError(
                     self.current_tok.pos_start, self.current_tok.pos_end,
                     f"Expected 'then'"
@@ -98,6 +100,104 @@ class Parser:
             if res.error: return res
 
         return res.success(IfNode(cases, else_case))
+
+    def for_expr(self):
+        res = ParseResult()
+
+        if not self.current_tok.matches(TT_KEYWORD, "for"):
+            return res.failure(InvalidSyntaxError(
+                self.current_tok.pos_start, self.current_tok.pos_end,
+                f"Expected 'for'"
+            ))
+
+        res.register_advancement()
+        self.advance()
+
+        if self.current_tok.type != TT_IDENTIFIER:
+            return res.failure(InvalidSyntaxError(
+                self.current_tok.pos_start, self.current_tok.pos_end,
+                f"Expected identifier"
+            ))
+
+        var_name = self.current_tok
+        res.register_advancement()
+        self.advance()
+
+        if self.current_tok.type != TT_EQ:
+            return res.failure(InvalidSyntaxError(
+                self.current_tok.pos_start, self.current_tok.pos_end,
+                f"Expected '='"
+            ))
+        
+        res.register_advancement()
+        self.advance()
+
+        start_value = res.register(self.expr())
+        if res.error: return res
+
+        if not self.current_tok.matches(TT_KEYWORD, "to"):
+            return res.failure(InvalidSyntaxError(
+                self.current_tok.pos_start, self.current_tok.pos_end,
+                f"Expected 'to'"
+            ))
+        
+        res.register_advancement()
+        self.advance()
+
+        end_value = res.register(self.expr())
+        if res.error: return res
+
+        if self.current_tok.matches(TT_KEYWORD, "step"):
+            res.register_advancement()
+            self.advance()
+
+            step_value = res.register(self.expr())
+            if res.error: return res
+        else:
+            step_value = None
+
+        if not self.current_tok.matches(TT_KEYWORD, "then"):
+            return res.failure(InvalidSyntaxError(
+                self.current_tok.pos_start, self.current_tok.pos_end,
+                f"Expected 'then'"
+            ))
+
+        res.register_advancement()
+        self.advance()
+
+        body = res.register(self.expr())
+        if res.error: return res
+
+        return res.success(ForNode(var_name, start_value, end_value, step_value, body))
+
+    def while_expr(self):
+        res = ParseResult()
+
+        if not self.current_tok.matches(TT_KEYWORD, "while"):
+            return res.failure(InvalidSyntaxError(
+                self.current_tok.pos_start, self.current_tok.pos_end,
+                f"Expected 'while'"
+            ))
+
+        res.register_advancement()
+        self.advance()
+
+        condition = res.register(self.expr())
+        if res.error: return res
+
+        if not self.current_tok.matches(TT_KEYWORD, "then"):
+            return res.failure(InvalidSyntaxError(
+                self.current_tok.pos_start, self.current_tok.pos_end,
+                f"Expected 'then'"
+            ))
+
+        res.register_advancement()
+        self.advance()
+
+        body = res.register(self.expr())
+        if res.error: return res
+
+        return res.success(WhileNode(condition, body))
 
     def atom(self):
         res = ParseResult()
@@ -128,10 +228,20 @@ class Parser:
                     "Expected ')'"
                 ))
         
-        elif tok.matches(TT_KEYWORD, 'if'):
+        elif tok.matches(TT_KEYWORD, "if"):
             if_expr = res.register(self.if_expr())
             if res.error: return res
             return res.success(if_expr)
+
+        elif tok.matches(TT_KEYWORD, "for"):
+            for_expr = res.register(self.for_expr())
+            if res.error: return res
+            return res.success(for_expr)
+        
+        elif tok.matches(TT_KEYWORD, "while"):
+            while_expr = res.register(self.while_expr())
+            if res.error: return res
+            return res.success(while_expr)
 
         return res.failure(InvalidSyntaxError(
             tok.pos_start, tok.pos_end,

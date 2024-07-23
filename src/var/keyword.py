@@ -6,5 +6,9 @@ KEYWORDS = [
     "if",
     "then",
     "elif",
-    "else"
+    "else",
+    "for",
+    "to",
+    "step",
+    "while"
 ]
