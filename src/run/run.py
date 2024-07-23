@@ -1,6 +1,6 @@
 from main.lexer import Lexer
 from main.parser.parser import Parser
-from main.interpreter import Interpreter
+from main.interpret import Interpreter
 from main.symboltable import SymbolTable
 from src.run.context import Context
 from src.values.number import Number

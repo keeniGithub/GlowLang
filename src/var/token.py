@@ -22,3 +22,6 @@ TT_LT = "LT"
 TT_GT = "GT"
 TT_LTE = "LTE"
 TT_GTE = "GTE"
+
+TT_COMMA = "COMMA"
+TT_ARROW = "ARROW"
