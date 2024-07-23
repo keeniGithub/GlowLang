@@ -1,5 +1,5 @@
 from src.var.token import (
-    TT_INT, TT_FLOAT,
+    TT_INT, TT_FLOAT, TT_STRING,
     TT_MUL, TT_DIV,
     TT_POW,
     TT_PLUS, TT_MINUS,
@@ -11,7 +11,7 @@ from src.var.token import (
     TT_COMMA, TT_ARROW
     )
 
-from src.nodes.number import NumberNode
+from src.nodes.types.number import NumberNode
 from src.nodes.binop import BinOpNode
 from src.nodes.unaryop import UnaryOpNode
 from src.nodes.variables.access import VarAccessNode
@@ -21,6 +21,7 @@ from src.nodes.loops.forN import ForNode
 from src.nodes.loops.whileN import WhileNode
 from src.nodes.function.funcdef import FuncDefNode
 from src.nodes.function.call import CallNode
+from src.nodes.types.string import StringNode
 from main.parser.result import ParseResult
 from src.error.invalidsyntax import InvalidSyntaxError
 
@@ -210,6 +211,11 @@ class Parser:
             res.register_advancement()
             self.advance()
             return res.success(NumberNode(tok))
+        
+        if tok.type in TT_STRING:
+            res.register_advancement()
+            self.advance()
+            return res.success(StringNode(tok))
         
         elif tok.type == TT_IDENTIFIER:
             res.register_advancement()

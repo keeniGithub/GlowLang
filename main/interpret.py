@@ -1,5 +1,6 @@
 import src.values.function as Function
 from src.values.number import Number
+from src.values.string import String
 from src.run.runtime import RTResult
 from src.error.rt import RTError
 from src.var.token import (
@@ -25,6 +26,11 @@ class Interpreter:
             Number(node.tok.value).set_context(context).set_pos(node.pos_start, node.pos_end)
         )
     
+    def visit_StringNode(self, node, context):
+        return RTResult().success(
+            String(node.tok.value).set_context(context).set_pos(node.pos_start, node.pos_end)
+        )
+
     def visit_VarAccessNode(self, node, context):
         res = RTResult()
         var_name = node.var_name_tok.value
