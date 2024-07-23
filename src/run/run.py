@@ -3,7 +3,7 @@ from main.parser.parser import Parser
 from main.interpret import Interpreter
 from main.symboltable import SymbolTable
 from src.run.context import Context
-from src.values.number import Number
+from src.values.types.number import Number
 
 global_symbol_table = SymbolTable()
 global_symbol_table.set("null", Number(0))

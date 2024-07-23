@@ -13,8 +13,8 @@ from src.var.token import (
     )
 
 from src.nodes.types.number import NumberNode
-from src.nodes.binop import BinOpNode
-from src.nodes.unaryop import UnaryOpNode
+from src.nodes.ops.binop import BinOpNode
+from src.nodes.ops.unaryop import UnaryOpNode
 from src.nodes.variables.access import VarAccessNode
 from src.nodes.variables.assign import VarAssignNode
 from src.nodes.ifN import IfNode
@@ -25,7 +25,7 @@ from src.nodes.function.call import CallNode
 from src.nodes.types.string import StringNode
 from src.nodes.types.list import ListNode
 from main.parser.result import ParseResult
-from src.error.invalidsyntax import InvalidSyntaxError
+from src.error.message.invalidsyntax import InvalidSyntaxError
 
 class Parser:
     def __init__(self, tokens):

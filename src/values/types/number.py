@@ -1,4 +1,4 @@
-from src.error.rt import RTError
+from src.error.message.rt import RTError
 from src.values.value import Value
 
 class Number(Value):

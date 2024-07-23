@@ -2,8 +2,8 @@ from src.var.token import *
 from src.var.constant import *
 from src.var.keyword import KEYWORDS
 from src.tokens import Token
-from src.error.illegalchar import IllegalCharError
-from src.error.expectedchar import ExpectedCharError
+from src.error.message.illegalchar import IllegalCharError
+from src.error.message.expectedchar import ExpectedCharError
 from src.position import Position
 
 class Lexer():

@@ -1,9 +1,9 @@
 import src.values.function as Function
-from src.values.number import Number
-from src.values.string import String
-from src.values.list import List
+from src.values.types.number import Number
+from src.values.types.string import String
+from src.values.types.list import List
 from src.run.runtime import RTResult
-from src.error.rt import RTError
+from src.error.message.rt import RTError
 from src.var.token import (
     TT_MUL, TT_DIV,
     TT_PLUS, TT_MINUS,

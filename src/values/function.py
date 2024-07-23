@@ -2,7 +2,7 @@ import main.interpret as Interpreter
 from src.values.value import Value
 from src.run.runtime import RTResult
 from src.run.context import Context
-from src.error.rt import RTError
+from src.error.message.rt import RTError
 from main.symboltable import SymbolTable
 
 class Function(Value):

@@ -1,4 +1,4 @@
-from src.error.rt import RTError
+from src.error.message.rt import RTError
 from src.run.runtime import RTResult
 
 class Value:

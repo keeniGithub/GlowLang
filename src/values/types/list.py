@@ -1,6 +1,6 @@
-from src.values.number import Number
+from src.values.types.number import Number
 from src.values.value import Value
-from src.error.rt import RTError
+from src.error.message.rt import RTError
 
 class List(Value):
   def __init__(self, elements):
