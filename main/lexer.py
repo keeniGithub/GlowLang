@@ -24,6 +24,9 @@ class Lexer():
         while self.current_char != None:
             if self.current_char in " \t":
                 self.advance()
+            elif self.current_char in ";\n":
+                tokens.append(Token(TT_NEWLINE, pos_start=self.pos))
+                self.advance()
 
             elif self.current_char in DIGITS:
                 tokens.append(self.make_number())
