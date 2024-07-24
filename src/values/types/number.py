@@ -1,3 +1,4 @@
+import math
 from src.error.message.rt import RTError
 from src.values.value import Value
 
@@ -105,3 +106,8 @@ class Number(Value):
 
     def __repr__(self):
         return str(self.value)
+    
+Number.null = Number(0)
+Number.false = Number(0)
+Number.true = Number(1)
+Number.math_PI = Number(math.pi)
