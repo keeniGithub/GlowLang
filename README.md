@@ -8,6 +8,10 @@
     Basic-ка подобный, интерпретируемый язык на Python
 </h3>
 
+<p align="center">
+    <a href="https://github.com/keeniGithub/GlowLang/discussions">Discussions</a>
+</p>
+
 <br>
 
 <h1 align="center">
