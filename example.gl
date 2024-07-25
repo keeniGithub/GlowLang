@@ -1,0 +1,15 @@
+// Вычисления факториал на Glow
+
+func factorial(n)
+    var fctrl = 1
+    while n > 1 then
+        var fctrl = fctrl*n
+        var n = n-1
+    end
+    
+    return fctrl
+end
+
+var n = input_int()
+
+print(factorial(n))

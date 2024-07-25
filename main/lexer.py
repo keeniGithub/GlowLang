@@ -27,6 +27,8 @@ class Lexer():
             elif self.current_char in ";\n":
                 tokens.append(Token(TT_NEWLINE, pos_start=self.pos))
                 self.advance()
+            elif self.current_char in "//":
+                self.skip_comment()
 
             elif self.current_char in DIGITS:
                 tokens.append(self.make_number())
@@ -187,7 +189,7 @@ class Lexer():
             tok_type = TT_LTE
 
         return Token(tok_type, pos_start=pos_start, pos_end=self.pos)
-    
+
     def make_greater_than(self):
         tok_type = TT_GT
         pos_start = self.pos.copy()
@@ -198,3 +200,11 @@ class Lexer():
             tok_type = TT_GTE
 
         return Token(tok_type, pos_start=pos_start, pos_end=self.pos)
+    
+    def skip_comment(self):
+        self.advance()
+
+        while self.current_char != '\n':
+            self.advance()
+
+        self.advance()

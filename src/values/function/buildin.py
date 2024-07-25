@@ -1,4 +1,5 @@
 import os
+import src.run.run as run
 from src.values.types.number import Number
 from src.values.types.string import String
 from src.values.types.list import List
@@ -40,11 +41,6 @@ class BuiltInFunction(BaseFunction):
     print(str(exec_ctx.symbol_table.get("value")))
     return RTResult().success(Number.null)
   execute_print.arg_names = ["value"]
-
-  def execute_lol(self, exec_ctx): # lol func
-    print("Лол")
-    return RTResult().success(Number.null)
-  execute_lol.arg_names = ["value"]
   
   def execute_print_ret(self, exec_ctx):
     return RTResult().success(String(str(exec_ctx.symbol_table.get("value"))))
@@ -156,3 +152,62 @@ class BuiltInFunction(BaseFunction):
     listA.elements.extend(listB.elements)
     return RTResult().success(Number.null)
   execute_extend.arg_names = ["listA", "listB"]
+    
+  def execute_len(self, exec_ctx):
+      list_ = exec_ctx.symbol_table.get("list")
+
+      if not isinstance(list_, List):
+        return RTResult().failure(RTError(
+          self.pos_start, self.pos_end,
+          "Argument must be list",
+          exec_ctx
+        ))
+
+      return RTResult().success(Number(len(list_.elements)))
+  execute_len.arg_names = ["list"]
+
+  def execute_run(self, exec_ctx):
+    fn = exec_ctx.symbol_table.get("fn")
+
+    if not isinstance(fn, String):
+      return RTResult().failure(RTError(
+        self.pos_start, self.pos_end,
+        "Second argument must be string",
+        exec_ctx
+      ))
+
+    fn = fn.value
+
+    try:
+      with open(fn, "r") as f:
+        script = f.read()
+        filename, file_extension = os.path.splitext(fn)
+
+        if file_extension != ".gl":
+          print(0)
+          return RTResult().failure(RTError(
+            self.pos_start, self.pos_end,
+            f"Invalid file format (not .gl)" +
+            error.as_string(),
+            exec_ctx
+          ))
+
+    except Exception as e:
+      return RTResult().failure(RTError(
+        self.pos_start, self.pos_end,
+        f"Failed to load script \"{fn}\"\n" + str(e),
+        exec_ctx
+      ))
+
+    _, error = run.run(fn, script)
+    
+    if error:
+      return RTResult().failure(RTError(
+        self.pos_start, self.pos_end,
+        f"Failed to finish executing script \"{fn}\"\n" +
+        error.as_string(),
+        exec_ctx
+      ))
+
+    return RTResult().success(Number.null)
+  execute_run.arg_names = ["fn"]

@@ -11,9 +11,9 @@ global_symbol_table.set("null", Number.null)
 global_symbol_table.set("true", Number.true)
 global_symbol_table.set("false", Number.false)
 global_symbol_table.set("pi", Number.math_PI)
+global_symbol_table.set("e", Number.math_E)
 
 BuiltInFunction.print = BuiltInFunction("print")
-BuiltInFunction.print_ret = BuiltInFunction("print_ret")
 BuiltInFunction.input = BuiltInFunction("input")
 BuiltInFunction.input_int = BuiltInFunction("input_int")
 BuiltInFunction.clear = BuiltInFunction("clear")
@@ -24,9 +24,10 @@ BuiltInFunction.is_function = BuiltInFunction("is_function")
 BuiltInFunction.append = BuiltInFunction("append")
 BuiltInFunction.pop = BuiltInFunction("pop")
 BuiltInFunction.extend = BuiltInFunction("extend")
+BuiltInFunction.len = BuiltInFunction("len")
+BuiltInFunction.run = BuiltInFunction("run")
 
 global_symbol_table.set("print", BuiltInFunction.print)
-global_symbol_table.set("print_ret", BuiltInFunction.print_ret)
 global_symbol_table.set("input", BuiltInFunction.input)
 global_symbol_table.set("input_int", BuiltInFunction.input_int)
 global_symbol_table.set("clear", BuiltInFunction.clear)
@@ -38,6 +39,8 @@ global_symbol_table.set("is_func", BuiltInFunction.is_function)
 global_symbol_table.set("append", BuiltInFunction.append)
 global_symbol_table.set("pop", BuiltInFunction.pop)
 global_symbol_table.set("extend", BuiltInFunction.extend)
+global_symbol_table.set("len", BuiltInFunction.len)
+global_symbol_table.set("run", BuiltInFunction.run)
 
 def run(fn, text):
     lexer = Lexer(fn, text)
@@ -53,4 +56,4 @@ def run(fn, text):
     context.symbol_table = global_symbol_table
     result = interpreter.visit(ast.node, context)
 
-    return result.value, result.error #ast.node, ast.error
+    return result.value, result.error
