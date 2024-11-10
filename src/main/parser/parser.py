@@ -18,7 +18,7 @@ from src.nodes.ops.binop import BinOpNode
 from src.nodes.ops.unaryop import UnaryOpNode
 from src.nodes.variables.access import VarAccessNode
 from src.nodes.variables.assign import VarAssignNode
-from src.nodes.ifN import IfNode
+from src.nodes.condition.ifN import IfNode
 from src.nodes.loops.forN import ForNode
 from src.nodes.loops.whileN import WhileNode
 from src.nodes.function.funcdef import FuncDefNode
@@ -29,7 +29,7 @@ from src.nodes.jump.breakN import BreakNode
 from src.nodes.jump.returnN import ReturnNode
 from src.nodes.jump.continueN import ContinueNode
 from src.error.message.invalidsyntax import InvalidSyntaxError
-from main.parser.result import ParseResult
+from src.main.parser.result import ParseResult
 
 class Parser:
     def __init__(self, tokens):

@@ -1,4 +1,4 @@
-import main.interpret as Interpreter
+import src.main.interpret as Interpreter
 from src.values.function.base import BaseFunction
 from src.values.types.number import Number
 from src.run.runtime import RTResult

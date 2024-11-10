@@ -2,7 +2,7 @@ from src.values.value import Value
 from src.error.message.rt import RTError
 from src.run.runtime import RTResult
 from src.run.context import Context
-from main.symboltable import SymbolTable
+from src.main.symboltable import SymbolTable
 
 class BaseFunction(Value):
   def __init__(self, name):
