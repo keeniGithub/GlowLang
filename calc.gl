@@ -1,4 +1,0 @@
-var a = input_int(); 
-var b = input_int();
-var c = a + b;
-print(c)

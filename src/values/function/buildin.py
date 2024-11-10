@@ -6,6 +6,7 @@ from src.values.types.list import List
 from src.run.runtime import RTResult
 from src.error.message.rt import RTError
 from src.values.function.base import BaseFunction
+from src.var.keyword import FILE_FORMAT
 
 class BuiltInFunction(BaseFunction):
   def __init__(self, name):
@@ -183,11 +184,10 @@ class BuiltInFunction(BaseFunction):
         script = f.read()
         filename, file_extension = os.path.splitext(fn)
 
-        if file_extension != ".gl":
-          print(0)
+        if file_extension not in FILE_FORMAT:
           return RTResult().failure(RTError(
             self.pos_start, self.pos_end,
-            f"Invalid file format (not .gl)" +
+            f"Invalid file format (not .gl or .glang or .glow)" +
             error.as_string(),
             exec_ctx
           ))

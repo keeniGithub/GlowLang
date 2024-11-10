@@ -17,3 +17,9 @@ KEYWORDS = [
     "continue",
     "break"
 ]
+
+FILE_FORMAT = [
+    ".gl",
+    ".glow",
+    ".glang"
+]
