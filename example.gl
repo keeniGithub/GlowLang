@@ -2,7 +2,7 @@
 
 func factorial(n)
     var fctrl = 1
-    while n > 1 then
+    while n > 1 :
         var fctrl = fctrl*n
         var n = n-1
     end

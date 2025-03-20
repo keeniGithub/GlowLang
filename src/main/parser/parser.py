@@ -10,7 +10,8 @@ from src.var.token import (
     TT_EE, TT_NE, TT_LT, TT_GT,
                   TT_LTE, TT_GTE,
     TT_COMMA, TT_ARROW,
-    TT_NEWLINE
+    TT_NEWLINE,
+    TT_COLON
 )
 
 from src.nodes.types.number import NumberNode
@@ -179,10 +180,10 @@ class Parser:
         condition = res.register(self.expr())
         if res.error: return res
 
-        if not self.current_tok.matches(TT_KEYWORD, "then"):
+        if self.current_tok.type != TT_COLON:
             return res.failure(InvalidSyntaxError(
                 self.current_tok.pos_start, self.current_tok.pos_end,
-                f"Expected 'then'"
+                f"Expected ':'"
             ))
 
         res.register_advancement()
@@ -271,10 +272,10 @@ class Parser:
         else:
             step_value = None
 
-        if not self.current_tok.matches(TT_KEYWORD, "then"):
+        if self.current_tok.type != TT_COLON:
             return res.failure(InvalidSyntaxError(
                 self.current_tok.pos_start, self.current_tok.pos_end,
-                f"Expected 'then'"
+                f"Expected ':'"
             ))
 
         res.register_advancement()
@@ -318,10 +319,10 @@ class Parser:
         condition = res.register(self.statement())
         if res.error: return res
 
-        if not self.current_tok.matches(TT_KEYWORD, "then"):
+        if self.current_tok.type != TT_COLON:
             return res.failure(InvalidSyntaxError(
                 self.current_tok.pos_start, self.current_tok.pos_end,
-                f"Expected 'then'"
+                f"Expected ':'"
             ))
 
         res.register_advancement()

@@ -106,14 +106,14 @@ var e = (2 + 2) * 2
   Циклы
 </h2>
 
-Glow использует конструкцию to then end как в Basic
+Glow использует конструкцию to then end как в Basic _(правда с последней версии вместо 'then' теперь ':')_
 
 ## Цикл For
 
 **Пример:**
 
 ```basic
-for i = 0 to 5 then
+for i = 0 to 5 :
     print(i)
 end
 ```
@@ -135,7 +135,7 @@ end
 ```basic
 var i = 0
 
-while i < 5 then
+while i < 5 :
     var i = i+1
     print(i)
 end
@@ -177,9 +177,9 @@ end
 ```basic
 var i = 101
 
-if i == 100 then
+if i == 100 :
     print("i is 100")
-elif i == 101 then
+elif i == 101 :
     print("i is 101")
 else
     print("i not 100 and not 101")
@@ -206,7 +206,7 @@ i is 101
 
 func factorial(n)
     var fctrl = 1
-    while n > 1 then
+    while n > 1 :
         var fctrl = fctrl*n
         var n = n-1
     end
@@ -255,6 +255,7 @@ print(sum(2, 2))
 - `is_list` - Является ли передаваемый аргумент списком
 - `is_function` - Является ли передаваемый аргумент функцией
 - `append` - Добавляет новый элемент в конец списка
+- `extend` - Объеденяет 2 списка
 - `pop` - Удаляет элемент по указаному индексу
 - `len` - Считает кол-во элемнтов в списке
 - `clear` или `cls` - Очищает консоль

@@ -4,7 +4,6 @@ KEYWORDS = [
     "or",
     "not",
     "if",
-    "then",
     "elif",
     "else",
     "for",
